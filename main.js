@@ -22,11 +22,7 @@ class Project{
         this.particles.push(new Particle(new Vector(x, y), new Vector(vx, vy), this.ctx, colour, isExploded, size))
     }
     randomBetween(a, b){
-        return Math.floor(Math.random()*(b-a))+a
-    }
-    randomVector2D(){
-        let angle = Math.random()*2*Math.PI
-        return new Vector(Math.cos(angle), Math.sin(angle))
+        return Math.random()*(b-a)+a
     }
     updateParticles(){
         if(Math.random() > 0.98){
