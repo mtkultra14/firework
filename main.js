@@ -25,7 +25,7 @@ class Project{
         return Math.random()*(b-a)+a
     }
     updateParticles(){
-        if(Math.random() > 0.98){
+        if(Math.random() > 0.985){
             this.createParticle(this.randomBetween(125, 675), 600, this.randomBetween(-1, 1), this.randomBetween(-10, -8), this.getRandomColor(), false, 4)
         }
         this.ctx.fillStyle = "rgba(0, 0, 0, 0.2)"
