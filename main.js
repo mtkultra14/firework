@@ -41,10 +41,10 @@ class Project{
             //check for explosion
             if(!this.particles[i].isExploded && this.particles[i].v.y <= 0 && this.particles[i].v.y >= -1){
                 //create new particles in a heart shape
-                for(let x=-2;x<=2;x+=0.015){
-                    x = parseFloat(x.toFixed(3))
-                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y,  x,  -Math.acos(1-Math.abs(x))+Math.PI, this.particles[i].colour, true, 2.3)
-                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y+6,  x,  -Math.sqrt(1-Math.pow(Math.abs(x)-1, 2)), this.particles[i].colour, true, 2.3)
+                for(let x=-2000;x<=2000;x+=40){
+                    let xOffset = x/100
+                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y,  xOffset,  -Math.acos(1-Math.abs(xOffset))+Math.PI, this.particles[i].colour, true, 2.3)
+                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y+6,  xOffset,  -Math.sqrt(1-Math.pow(Math.abs(xOffset)-1, 2)), this.particles[i].colour, true, 2.3)
                 }
                 this.particles.splice(i, 1)
             }
