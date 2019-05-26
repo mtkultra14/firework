@@ -3,18 +3,18 @@ class Project{
         this.canvas = document.getElementById("canvas")
         this.ctx = this.canvas.getContext("2d")
         //centering canvas
-        this.canvas.width = "600"
+        this.canvas.width = "800"
         this.canvas.height = "600"
-        this.canvas.style.left = String(window.innerWidth*0.5-300)
+        this.canvas.style.left = String(window.innerWidth*0.5-400)
         this.canvas.style.top = String(window.innerHeight*0.5-300)
 
         this.particles = []
     }
     getRandomColor() {
-        const letters = '456789ABCDEF';
+        const letters = '6789ABCDEF';
         let color = '#';
         for (var i=0;i<6;i++){
-          color += letters[Math.floor(Math.random()*12)];
+          color += letters[Math.floor(Math.random()*10)];
         }
         return color;
     }
@@ -30,10 +30,10 @@ class Project{
     }
     updateParticles(){
         if(Math.random() > 0.98){
-            this.createParticle(this.randomBetween(25, 575), 600, 0, this.randomBetween(-10, -8), this.getRandomColor(), false, 4)
+            this.createParticle(this.randomBetween(125, 675), 600, this.randomBetween(-1, 1), this.randomBetween(-10, -8), this.getRandomColor(), false, 4)
         }
         this.ctx.fillStyle = "rgba(0, 0, 0, 0.2)"
-        this.ctx.fillRect(0, 0, 600, 600)
+        this.ctx.fillRect(0, 0, 800, 600)
         for(let i=this.particles.length-1;i>=0;i--){
             this.particles[i].update()
             this.particles[i].show()
@@ -45,9 +45,10 @@ class Project{
             //check for explosion
             if(!this.particles[i].isExploded && this.particles[i].v.y <= 0 && this.particles[i].v.y >= -1){
                 //create new particles in a heart shape
-                for(let x=-2;x<2;x+=0.02){
-                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y,  x,  -Math.acos(1-Math.abs(x))+Math.PI, this.particles[i].colour, true, 2)
-                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y,  x,  -Math.sqrt(1-Math.pow(Math.abs(x)-1, 2)), this.particles[i].colour, true, 2)
+                for(let x=-2;x<=2;x+=0.015){
+                    x = parseFloat(x.toFixed(3))
+                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y,  x,  -Math.acos(1-Math.abs(x))+Math.PI, this.particles[i].colour, true, 2.3)
+                    this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y+6,  x,  -Math.sqrt(1-Math.pow(Math.abs(x)-1, 2)), this.particles[i].colour, true, 2.3)
                 }
                 this.particles.splice(i, 1)
             }
