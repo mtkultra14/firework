@@ -25,7 +25,7 @@ class Project{
         return Math.random()*(b-a)+a
     }
     updateParticles(){
-        if(Math.random() > 0.985){
+        if(Math.random() > 0.99){
             this.createParticle(this.randomBetween(125, 675), 600, this.randomBetween(-1, 1), this.randomBetween(-10, -8), this.getRandomColor(), false, 4)
         }
         this.ctx.fillStyle = "rgba(0, 0, 0, 0.2)"
@@ -34,14 +34,14 @@ class Project{
             this.particles[i].update()
             this.particles[i].show()
             //delete particles that have fallen out
-            if(this.particles[i].pos.y >= 600 || this.particles[i].fadeCount == 0){
+            if(this.particles[i].pos.y >= 600 || this.particles[i].fadeCount <= 0){
                 this.particles.splice(i, 1)
                 continue
             }
             //check for explosion
             if(!this.particles[i].isExploded && this.particles[i].v.y <= 0 && this.particles[i].v.y >= -1){
                 //create new particles in a heart shape
-                for(let x=-2000;x<=2000;x+=20){
+                for(let x=-2000;x<=2000;x+=40){
                     let xOffset = x/1000
                     this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y,  xOffset,  -Math.acos(1-Math.abs(xOffset))+Math.PI, this.particles[i].colour, true, 2.3)
                     this.createParticle(this.particles[i].pos.x, this.particles[i].pos.y+6,  xOffset,  -Math.sqrt(1-Math.pow(Math.abs(xOffset)-1, 2)), this.particles[i].colour, true, 2.3)
